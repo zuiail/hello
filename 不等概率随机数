@@ -1,0 +1,13 @@
+//产生0~n之间的随机数，0的概率最大，n的概率最小
+private static int myRandom(int n) {
+    int max = n+1;    //0~n共有n+1个数字
+    int bigend = ((1+max)*max)/2;    //大区间的上限(1+2+……+max)
+    int x = (int)(Math.random()*bigend); //产生一个区间内的随机数x
+    int sum = 0;    //sum表示了各个小区间的上限
+    for(int i=0; i<max; i++) {
+        sum += (max-i); //sum每次增长的长度为各个小区间的跨度
+        if(sum > x)    //如果sum>x，就表明x落在了第i个小区间内
+            return i; //因此，i就是我们要产生的随机数
+    }
+    return -1;
+} 
